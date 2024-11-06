@@ -1,22 +1,22 @@
 import Button from "./Button";
 
-function FormSplitBill() {
+function FormSplitBill({ selectedFriend }) {
   return (
     <form action="" className="form-split-bill">
-      <h2>split a bill with X</h2>
+      <h2>Split a bill with {selectedFriend.name}</h2>
       <label htmlFor="">Bill Value</label>
       <input type="text" name="" id="" />
 
       <label htmlFor="">Your Expense</label>
       <input type="text" name="" id="" />
 
-      <label htmlFor="">X's Expense</label>
+      <label htmlFor="">{selectedFriend.name}'s Expense</label>
       <input type="text" name="" id="" disabled />
 
       <label htmlFor="">💰 Who's paying the bill?</label>
       <select name="" id="">
         <option value="">You</option>
-        <option value="">X</option>
+        <option value="">{selectedFriend.name}</option>
       </select>
       <Button>Split Bill</Button>
     </form>
