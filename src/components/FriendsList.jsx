@@ -1,7 +1,7 @@
 import Friend from "./Friend";
 import "../index.css";
 
-function FriendsList({ friends, onHandleSelect, selectedFriend }) {
+function FriendsList({ friends, onSelect, selectedFriend }) {
   // const friends = initialFriends;
   return (
     <ul>
@@ -9,7 +9,7 @@ function FriendsList({ friends, onHandleSelect, selectedFriend }) {
         <Friend
           friend={friend}
           key={friend.id}
-          onHandleSelect={onHandleSelect}
+          onSelect={onSelect}
           selectedFriend={selectedFriend}
         />
       ))}

@@ -30,10 +30,11 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [friends, setFriends] = useState(initialFriends);
   const [selectedFriend, setSelectedFriend] = useState(null);
+  // const [isDark, setIsDark] = useState(false);
 
   function handleOpen() {
     setIsOpen((prev) => !prev);
-    console.log(isOpen);
+    // console.log(isOpen);
   }
 
   function handleAddFriend(friend) {
@@ -42,21 +43,50 @@ function App() {
   }
 
   const handleSelect = (friend) => {
-    setSelectedFriend(friend);
+    // setSelectedFriend(friend);
+    // setSelectedFriend((cur) => (cur?.id === friend.id ? null : friend));
+
+    // my fav way of writin this
+    setSelectedFriend((cur) => cur?.id !== friend.id && friend);
+    setIsOpen(false);
   };
 
+  function handleSplitBill(value) {
+    setFriends((friends) =>
+      friends.map((friend) =>
+        selectedFriend.id === friend.id
+          ? { ...friend, balance: friend.balance + value }
+          : friend
+      )
+    );
+
+    setSelectedFriend(null);
+  }
+
+  // function handleDark() {
+  //   setIsDark((prev) => !prev);
+  // }
+
   return (
-    <div className="app">
+    <div className={`app`}>
       <div className="sidebar">
+        {/* <nav onClick={handleDark}>
+          <h1>yooo</h1>
+        </nav> */}
         <FriendsList
           friends={friends}
-          onHandleSelect={handleSelect}
+          onSelect={handleSelect}
           selectedFriend={selectedFriend}
         />
         {isOpen && <FormAddFriend onAddFriend={handleAddFriend} />}
         <Button onClick={handleOpen}>{isOpen ? "Close" : "Add Friend"}</Button>
       </div>
-      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} />}
+      {selectedFriend && (
+        <FormSplitBill
+          selectedFriend={selectedFriend}
+          onSplitBill={handleSplitBill}
+        />
+      )}
     </div>
   );
 }

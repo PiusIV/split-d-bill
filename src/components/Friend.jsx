@@ -2,9 +2,9 @@ import Button from "./Button";
 import "../index.css";
 // import { useState } from "react";
 
-function Friend({ friend, onHandleSelect, selectedFriend }) {
-  const isSelected = selectedFriend.id === friend.id;
-  //   console.log(friend.name);
+function Friend({ friend, onSelect, selectedFriend }) {
+  const isSelected = selectedFriend?.id === friend.id;
+  //   console.log(isSelected);
 
   return (
     <li className={isSelected ? "selected" : ""}>
@@ -23,7 +23,7 @@ function Friend({ friend, onHandleSelect, selectedFriend }) {
       )}
       {friend.balance === 0 && <p>You and {friend.name} are even</p>}
 
-      <Button onClick={() => onHandleSelect(friend)}>
+      <Button onClick={() => onSelect(friend)}>
         {isSelected ? "Close" : "Select"}
       </Button>
     </li>
